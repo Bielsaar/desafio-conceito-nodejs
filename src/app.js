@@ -30,14 +30,14 @@ app.post("/repositories", (request, response) => {
 app.put("/repositories/:id", (request, response) => {
   const { id } = request.params;
   const { title, url, techs} = request.body;
-  const { likes } = request.query;
-
+  
   const repositoryIndex = repositories.findIndex(repository => repository.id === id);
 
   if (repositoryIndex < 0) {
     return response.status(400).json({ error: "Repository not found. "})
   }
 
+  const likes = repositories[repositoryIndex].likes;
   const repository = {
     id,
     title,
